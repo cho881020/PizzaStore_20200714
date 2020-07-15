@@ -1,5 +1,6 @@
 package kr.co.tjoeun.pizzastore_20200714.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_pizza_store_list.*
 import kr.co.tjoeun.pizzastore_20200714.R
+import kr.co.tjoeun.pizzastore_20200714.ViewPizzaStoreDetailActivity
 import kr.co.tjoeun.pizzastore_20200714.adapters.PizzaStoreAdapter
 import kr.co.tjoeun.pizzastore_20200714.datas.PizzaStore
 
@@ -35,6 +37,23 @@ class PizzaStoreListFragment : Fragment() {
         mAdapter = PizzaStoreAdapter(activity!!, R.layout.pizza_store_list_item, mPizzaStoreList)
 
         pizzaStoreListView.adapter = mAdapter
+
+//        리스트뷰의 아이템 클릭 이벤트 지원
+        pizzaStoreListView.setOnItemClickListener { parent, view, position, id ->
+
+//            클릭된 가게가 어디인지 찾아내서 저장
+            val clickedPizzaStore = mPizzaStoreList[position]
+
+//            가게 정보를 들고 상세 보기 화면으로 이동
+            val myIntent = Intent(activity, ViewPizzaStoreDetailActivity::class.java)
+
+//            가게 정보를 첨부 => Serializable을 붙여야 에러 X.
+            myIntent.putExtra("pizzaStore", clickedPizzaStore)
+
+            startActivity(myIntent)
+
+        }
+
     }
 
 }
