@@ -37,15 +37,12 @@ class ViewPizzaStoreDetailActivity : BaseActivity() {
             val pl = object : PermissionListener {
                 override fun onPermissionGranted() {
 //                    권한 허가가 되어있는 경우 (or 지금 허락 해준 경우)
-
 //                    안드로이드 전화 CALL 기능 실제 호출
-
 //                    어디로 전화걸지 정보 설정
                     val myUri = Uri.parse("tel:${mPizzaStore.phoneNum}")
 //                    CALL 액션 인텐트
                     val myIntent = Intent(Intent.ACTION_CALL, myUri)
                     startActivity(myIntent)
-
 
                 }
 
